@@ -5,10 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import service.AccountDataStatus;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,26 +38,7 @@ public class DatabaseOperation {
         em.close();
 
     }
-//    public void editVacationPackage(VacationPackage  va) {
-//        EntityManager em = entityManagerFactor.createEntityManager();
-//        em.getTransaction().begin();
-//        try {
-//            em.createQuery("SELECT u from TravellingAgency u WHERE (u.username = :username OR u.email = :email) AND u.password =:password", TravellingAgency.class).
-//                    setParameter("username", usernameOrEmail).
-//                    setParameter("email", usernameOrEmail).
-//                    setParameter("password", password).getSingleResult();
-//            em.getTransaction().commit();
-//            em.close();
-//            return AccountDataStatus.VALID;
-//
-//        } catch (NoResultException e) {
-//            System.out.println("No user found by provided credentials.");
-//            em.getTransaction().commit();
-//            em.close();
-//            return AccountDataStatus.WRONG_CREDENTIALS;
-//        }
-//
-//    }
+
 
     public void editVacationPackage(VacationPackage vp) {
        EntityManager em = entityManagerFactor.createEntityManager();
@@ -71,6 +49,15 @@ public class DatabaseOperation {
 
 
 
+    }
+    public void deleteVacationPackage(String name){
+        EntityManager em = entityManagerFactor.createEntityManager();
+        em.getTransaction().begin();
+        Query query = em.createQuery("DELETE from VacationPackage u where u.name=:name");
+        query.setParameter("name",name);
+        query.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
     }
 
 

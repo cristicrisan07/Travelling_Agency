@@ -15,7 +15,7 @@ public class TravellingAgencyView extends JFrame {
 
     JButton addDestinationButton=new JButton("Add new destination.");
     JButton addVacationPackage=new JButton("Add new vacation package.");
-    JButton editExistingPackage=new JButton("Edit an existing package.");
+    JButton editExistingPackage=new JButton("Edit/delete an existing package.");
 
     public TravellingAgencyView(String name)  {
         super(name);

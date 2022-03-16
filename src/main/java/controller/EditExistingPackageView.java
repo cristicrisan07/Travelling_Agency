@@ -19,7 +19,8 @@ public class EditExistingPackageView extends JFrame {
     private JPanel MainPane = new JPanel(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
 
-    protected JButton editVacationPackageButton=new JButton("Edit the vacation package.");
+    private JButton editVacationPackageButton=new JButton("Edit the vacation package.");
+    private JButton deleteVacationPackageButton=new JButton("Delete the vacation package.");
 
     JComboBox destinationsJComboBox;
 
@@ -215,6 +216,12 @@ public class EditExistingPackageView extends JFrame {
                     ,vp);
             JOptionPane.showMessageDialog(this,response);
         });
+        c.gridx++;
+        MainPane.add(deleteVacationPackageButton,c);
+        deleteVacationPackageButton.addActionListener(e->{
+                   JOptionPane.showMessageDialog(this,UIService.deleteVacationPackage(vp));
+                   this.dispose();
+        });
 
         this.add(MainPane);
         this.pack();
@@ -239,7 +246,7 @@ public class EditExistingPackageView extends JFrame {
         existingVacationPackagesCB.setSelectedIndex(0);
         MainPane.add(existingVacationPackagesCB,c);
         c.gridy++;
-        JButton editButton=new JButton("Edit");
+        JButton editButton=new JButton("Edit/Delete");
         editButton.addActionListener(e-> {
             openEditingWindow(UIService.getVacationPackageObjectFromName(existingVacationPackagesCB.getSelectedItem().toString(),vacationPackages));
             editButton.setVisible(false);
@@ -252,7 +259,7 @@ public class EditExistingPackageView extends JFrame {
     }
 
     public static void main(String []args){
-        JFrame frame = new EditExistingPackageView("Add a new destination.");
+        JFrame frame = new EditExistingPackageView("Edit/delete a destination.");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

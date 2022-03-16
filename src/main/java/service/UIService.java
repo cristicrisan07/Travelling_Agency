@@ -94,6 +94,10 @@ public class UIService {
         return "You have successfully edited the vacation package.";
     }
 
+    public static String deleteVacationPackage(VacationPackage vp){
+        dbo.deleteVacationPackage(vp.getName());
+        return "You have successfully deleted "+vp.getName();
 
+    }
 
 }
